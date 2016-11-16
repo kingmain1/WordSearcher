@@ -35,4 +35,25 @@ public class WordManager {
         return allWords;
     }
 
+    /**
+     * Performs the search for words 
+     * @param query
+     * @return 
+     */
+    public List<String> beginSearch(String query) throws FileNotFoundException 
+    {
+        List<String> allWords = getAllWords();
+        List<String> result = new ArrayList<>();
+        for(String word : allWords)
+        {
+            if(word.startsWith(query))
+            {
+                result.add(word);
+            }
+        }
+        return result;
+    }
+
+    
+    
 }

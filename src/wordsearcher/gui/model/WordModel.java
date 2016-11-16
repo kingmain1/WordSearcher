@@ -5,10 +5,9 @@
  */
 package wordsearcher.gui.model;
 
-import java.io.FileNotFoundException;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import wordsearcher.bll.WordManager;
 
 /**
  *
@@ -16,22 +15,35 @@ import wordsearcher.bll.WordManager;
  */
 public class WordModel {
 
+    /**
+     * The observable list, used for data binding the view to the model.
+     */
     private final ObservableList<String> items;
-
-    private WordManager wordMgr;
     
-    public WordModel() {
+    
+
+    public WordModel() 
+    {
         items = FXCollections.observableArrayList();
-        wordMgr = new WordManager();
     }
 
+    /**
+     * Gets the observable list of words.
+     * @return 
+     */
     public ObservableList<String> getWords() {
         return items;
     }
 
-    public void reset() throws FileNotFoundException 
+    /**
+     * Updates the word model to hold a new list of words.
+     * @param words 
+     */
+    public void setWords(List<String> words)
     {
         items.clear();
-        items.addAll(wordMgr.getAllWords());
+        items.addAll(words);
+        
     }
+    
 }
