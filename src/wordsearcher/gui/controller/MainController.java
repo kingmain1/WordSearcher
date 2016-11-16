@@ -5,6 +5,7 @@
  */
 package wordsearcher.gui.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,14 +33,15 @@ public class MainController implements Initializable {
      * The word model (Part of the MVC pattern. Resides in the GUI layer.
      */
     private WordModel model;
-    
+
     /**
-     * The manager of words. Resides in the logic layer. Performs logical operations.
+     * The manager of words. Resides in the logic layer. Performs logical
+     * operations.
      */
     private WordManager wordManager;
 
     /**
-     * Constructs the Controller. 
+     * Constructs the Controller.
      */
     public MainController() {
         model = new WordModel();
@@ -48,32 +50,36 @@ public class MainController implements Initializable {
 
     /**
      * Performs a word search.
-     * @param event 
+     *
+     * @param event
      */
     @FXML
-    void handleSearch(ActionEvent event) 
-    {
-        String query = txtQuery.getText().trim();
-        List<String> searchResult = wordManager.beginSearch(query);
-        model.setWords(searchResult);
+    void handleSearch(ActionEvent event) {
+        try 
+        {
+            String query = txtQuery.getText().trim();
+            List<String> searchResult = wordManager.beginSearch(query);
+            model.setWords(searchResult);
+        } catch (Exception ex) 
+        {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**
      * Initializes the controller to the default setting.
+     *
      * @param url
-     * @param rb 
+     * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) 
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         //Databinding:
         lstWords.setItems(model.getWords());
-        try 
-        {
+        try {
             List<String> allWords = wordManager.getAllWords();
             model.setWords(allWords);
-        } catch (Exception ex) 
-        {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

@@ -19,6 +19,8 @@ public class WordModel {
      * The observable list, used for data binding the view to the model.
      */
     private final ObservableList<String> items;
+    
+    
 
     public WordModel() 
     {
